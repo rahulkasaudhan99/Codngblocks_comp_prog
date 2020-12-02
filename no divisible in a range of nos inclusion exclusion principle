@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+int find(int s[],int K,int len){
+    int ans=0;
+    for(int i=1;i<(1<<len);i++){
+        int num=i;
+        int mult=1;
+        int count=0;
+        int j=0;
+        while(num>0){
+            if(num&1){
+                count++;
+                mult=mult*s[j];
+            }
+            j++;
+            num=num>>1;
+        }
+        int z=K/mult;
+        if(count%2!=0) ans+=z;
+        else ans-=z;
+    }
+    return ans;
+}
+
+//driver code 
+int main() {
+    int k,n;
+    int st[n];
+    cin>>k>>n;
+    for(int i=0;i<n;i++) cin>>st[i];
+
+    cout<<find(st,k,n)<<endl;
+
+    
+}
