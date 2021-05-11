@@ -1,0 +1,36 @@
+    int subarraysDivByK(vector<int>& A, int k) {
+        //add 1 in 0's frequency
+        //subarray from index i= a to b in cumulative sum arrays
+        //(b-a)%k==0   i.e b%k -a%k =0  or b%k==a%k
+        //find no of ways with same value of b%k and a%k and add them that will be the answer
+        int n=A.size();
+        int sum=0;
+        int freq[10001]={0};
+        freq[0]=1;
+        for(int i=0;i<n;i++){
+            sum+=A[i];
+            freq[((sum%k)+k)%k]++;
+        }
+
+        int ans=0;
+        for(int i=0;i<k;i++){
+            int f=freq[i];
+            if(freq[i]>1) ans=ans+((f)*(f-1))/2;
+        }
+        return ans;
+    }
+
+
+test cases
+/*
+[-2]
+6
+[-1,2,9]
+2
+[4,5,0,-2,-3,1]
+5
+[-2]
+6
+
+
+*/
